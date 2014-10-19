@@ -18,6 +18,11 @@ public class BlockFinder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub291
+		if(args.length!=2){
+			System.out.println("USAGE: % java BlockFinder <bmp-file> <csv-file>");
+			return;
+		}
+		
 		BlockFinder bf = new BlockFinder();
 		bf.readBmpFile(args[0]);
 		if(bf!=null){
