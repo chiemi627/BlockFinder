@@ -134,6 +134,9 @@ public class BlockFinder {
 		try {
 			FileWriter fw = new FileWriter(filename, false);
 			PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+			pw.write("width,height\n");
+			pw.write(""+this.width+","+this.height+"\n\n");
+			pw.write("x,y,width,height,direction\n");
 			for(int i=0;i<this.blocks.size();i++){
 				Block b = this.blocks.get(i);
 				pw.write(b.toString()+"\n");
