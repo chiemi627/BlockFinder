@@ -136,10 +136,10 @@ public class BlockFinder {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 			pw.write("width,height\n");
 			pw.write(""+this.width+","+this.height+"\n\n");
-			pw.write("x,y,width,height,direction\n");
+			pw.write("id,x,y,width,height,direction\n");
 			for(int i=0;i<this.blocks.size();i++){
 				Block b = this.blocks.get(i);
-				pw.write(b.toString()+"\n");
+				pw.write(i+","+b.toString()+"\n");
 			}
 			pw.close();
 		} catch (IOException e) {
