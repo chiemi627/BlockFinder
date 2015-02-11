@@ -21,4 +21,3 @@
 
 ## 実行
  % java BlockImageBuilder <ブロックファイル(csv)> <ブロックグループ(csv)> <bmpファイル>
- 
