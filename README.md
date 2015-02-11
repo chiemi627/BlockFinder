@@ -20,4 +20,4 @@
 * CSVファイルを直接変更して調整した後，その結果を確認することができます。
 
 ## 実行
- % java BlockImageBuilder <ブロックファイル(csv)> <ブロックグループ(csv)> <bmpファイル>
+ % java BlockImageBuilder <ブロック(csv)> <ブロックグループ(csv)> <出力ファイル(bmp)>
