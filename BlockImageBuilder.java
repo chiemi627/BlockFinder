@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,8 +19,10 @@ public class BlockImageBuilder {
 	public int width;
 	public int height;
 	public ArrayList<Block> blocks = new ArrayList<Block>();
+	public ArrayList<Block> areas = new ArrayList<Block>();
 
-	public void readBlockLayout(String filename) throws FileNotFoundException, IOException, Exception{
+	public ArrayList<Block> readBlockLayout(String filename) throws FileNotFoundException, IOException, Exception{
+		ArrayList<Block> blks = new ArrayList<Block>();
 		FileReader fr = new FileReader(filename);
 		BufferedReader br = new BufferedReader(fr);
 		String line = new String();
@@ -44,13 +47,14 @@ public class BlockImageBuilder {
 			blk.y = new Integer(data[2]).intValue();
 			blk.width = new Integer(data[3]).intValue();
 			blk.height = new Integer(data[4]).intValue();
-			this.blocks.add(blk);
+			blks.add(blk);
 		}
 		br.close();
+		return blks;
 	}
 	
 	public void writeBlocks(String filename){
-		BufferedImage img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_BYTE_GRAY);
+		BufferedImage img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D gr = img.createGraphics();
 		gr.setBackground(Color.white);
 		gr.clearRect(0, 0, this.width, this.height);
@@ -58,7 +62,14 @@ public class BlockImageBuilder {
 			Block b = this.blocks.get(i);
 			gr.setPaint(Color.BLACK);
 			gr.fillRect(b.x, b.y, b.width, b.height);
-		}		
+		}
+		BasicStroke st = new BasicStroke(2.0f);
+		gr.setStroke(st);
+		for(int i=0;i<this.areas.size();i++){
+			Block b = this.areas.get(i);
+			gr.setPaint(Color.RED);
+			gr.drawRect(b.x, b.y, b.width, b.height);
+		}
 		try {
 			ImageIO.write(img, "BMP", new File(filename));
 		} catch (IOException e) {
@@ -72,8 +83,9 @@ public class BlockImageBuilder {
 		// TODO Auto-generated method stub
 		BlockImageBuilder builder = new BlockImageBuilder();
 		try {
-			builder.readBlockLayout(args[0]);
-			builder.writeBlocks(args[1]);
+			builder.blocks = builder.readBlockLayout(args[0]);
+			builder.areas = builder.readBlockLayout(args[1]);
+			builder.writeBlocks(args[2]);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
