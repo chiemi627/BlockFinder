@@ -15,3 +15,10 @@ Bmp画像ファイルに含まれている黒の長方形を見つけて
  位置(x), 位置(y), 幅, 高さ, 向き
  
  向き情報：横に長いときは sideways, 縦に長いときはlongways です。
+ 
+BlockImageBuilder
+CSVファイルを直接変更して調整した後，その結果を確認することができます。
+
+■実行
+ % java BlockImageBuilder <csvファイル> <bmpファイル>
+ 
